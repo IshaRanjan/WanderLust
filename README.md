@@ -1,4 +1,4 @@
-# wanderlust
+# WANDERLUST
 WanderLust is a full-stack property listing web application inspired by Airbnb that allows users to discover, create, manage, and review vacation rental listings.
 
 ## Features
