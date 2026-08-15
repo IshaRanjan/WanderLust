@@ -1,139 +1,110 @@
-# WANDERLUST
-WanderLust is a full-stack property listing web application inspired by Airbnb that allows users to discover, create, manage, and review vacation rental listings.
+# 🏡 WanderLust
 
-## Features
+A full-stack travel and accommodation listing platform inspired by Airbnb, built with Node.js, Express.js, MongoDB, and EJS.
 
-- User Authentication (Sign Up, Login, Logout)
-- Authorization for Listings & Reviews
-- Create, Edit and Delete Listings
-- Image Upload using Cloudinary
-- Interactive Maps using Mapbox
-- Reviews & Ratings
-- Search Listings
-- Category Filters
-- Session Management
-- Flash Messages
-- Responsive UI
-- MVC Architecture
-- RESTful Routing
-- MongoDB Database Integration
+Users can explore destinations, create and manage property listings, upload images, leave reviews, and discover stays through an interactive map.
+
+## 🚀 Live Demo
+
+### [🌐 Visit WanderLust](https://wanderlust-lost-in-beauty.onrender.com)
 
 ---
 
-## Tech Stack
+## ✨ Features
+
+- 🔐 **User Authentication**
+  - User registration and login
+  - Session-based authentication with Passport.js
+  - Protected routes and authorization
+
+- 🏠 **Property Listings**
+  - Create, view, edit, and delete listings
+  - Listing descriptions, pricing, locations, and images
+  - Owner-based listing authorization
+
+- 🖼️ **Image Uploads**
+  - Image uploads using Cloudinary
+  - Cloud-hosted listing images
+  - Image optimization for faster loading
+
+- ⭐ **Reviews & Ratings**
+  - Add reviews and ratings to listings
+  - Delete reviews with authorization
+  - Reviews linked to authenticated users
+
+- 🗺️ **Interactive Maps**
+  - Location-based map integration
+  - Geocoding using OpenStreetMap/Nominatim
+  - Listing locations displayed on maps
+
+- 🔎 **Destination Search**
+  - Search interface for discovering destinations
+
+- 💰 **Tax Display**
+  - Optional display of total price including taxes
+
+- 📱 **Responsive UI**
+  - Responsive layout for desktop, tablet, and mobile devices
+
+---
+
+## 🛠️ Tech Stack
 
 ### Frontend
 - HTML5
 - CSS3
-- Bootstrap
 - JavaScript
 - EJS
+- EJS-Mate
+- Bootstrap
+- Font Awesome
 
 ### Backend
 - Node.js
 - Express.js
-- Express Router
-- Express Session
-- Cookie Parser
+- RESTful routing
 - Passport.js
-- Connect Flash
+- Express Session
 
 ### Database
 - MongoDB
+- MongoDB Atlas
 - Mongoose
 
-### Cloud Services
+### Cloud & APIs
+- Cloudinary — image storage
+- OpenStreetMap — map data
+- Nominatim — location geocoding
+
+### Deployment
+- Render
+- MongoDB Atlas
 - Cloudinary
-- Mapbox Geocoding API
 
 ---
 
-## Project Structure
+## 🏗️ Architecture
 
-```
-.
-├── controllers/
-├── models/
-├── routes/
-├── middleware.js
-├── utils/
-├── views/
-├── public/
-├── app.js
-├── cloudConfig.js
-└── package.json
-```
-
----
-
-## Key Functionalities
-
-### Authentication
-- Secure Registration
-- Login & Logout
-- Password Hashing
-- Session-based Authentication
-
-### Listings
-- Create Listings
-- Edit Listings
-- Delete Listings
-- Image Upload
-- Ownership Validation
-
-### Reviews
-- Add Reviews
-- Delete Reviews
-- Rating System
-- Authorization
-
-### Maps
-- Convert Addresses to Coordinates
-- Display Interactive Maps
-- Custom Map Markers
-
----
-
-## Installation
-
-```bash
-git clone https://github.com/IshaRanjan/WanderLust.git
-
-cd WanderLust
-
-npm install
-
-npm start
-```
-
----
-
-## Environment Variables
-
-Create a `.env` file.
-
-```
-ATLASDB_URL=
-CLOUD_NAME=
-CLOUD_API_KEY=
-CLOUD_API_SECRET=
-MAP_TOKEN=
-SECRET=
-```
-
----
-
-## Future Improvements
-
-- Booking & Reservation System
-- Payment Integration
-- Wishlist
-- User Profile Dashboard
-- Availability Calendar
-- Email Notifications
-
----
-
-## Author
-
-Isha Ranjan
+```text
+                    ┌─────────────────┐
+                    │      User       │
+                    └────────┬────────┘
+                             │
+                             ▼
+                    ┌─────────────────┐
+                    │   EJS / UI      │
+                    │   Bootstrap     │
+                    └────────┬────────┘
+                             │
+                             ▼
+                    ┌─────────────────┐
+                    │    Express.js   │
+                    │     Server      │
+                    └───────┬─┬─┬─────┘
+                            │ │ │
+              ┌─────────────┘ │ └──────────────┐
+              ▼               ▼                ▼
+       ┌─────────────┐ ┌─────────────┐ ┌──────────────┐
+       │ MongoDB     │ │ Cloudinary  │ │ OpenStreetMap│
+       │ Atlas       │ │             │ │ / Nominatim  │
+       └─────────────┘ └─────────────┘ └──────────────┘
