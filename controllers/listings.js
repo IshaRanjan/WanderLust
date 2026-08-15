@@ -32,58 +32,30 @@ module.exports.createListing = async (req, res) => {
     const locationName =
       `${req.body.listing.location}, ${req.body.listing.country}`;
 
-    // const response = await fetch(
-    //   `https://nominatim.openstreetmap.org/search?format=jsonv2&q=${encodeURIComponent(locationName)}&limit=1`,
-    //   {
-    //     headers: {
-    //       "User-Agent": "Wanderlust/1.0"
-    //     }
-    //   }
-    // );
-
-    // const data = await response.json();
-
     const response = await fetch(
-      `https://nominatim.openstreetmap.org/search?format=jsonv2&q=${encodeURIComponent(locationName)}&limit=1`,
-      {
-        headers: {
-          "User-Agent": "Wanderlust/1.0",
-          "Accept": "application/json"
-        }
-      });
+        `https://api.geoapify.com/v1/geocode/search?text=${encodeURIComponent(locationName)}&format=json&limit=1&apiKey=${process.env.GEOAPIFY_API_KEY}`
+      );
 
-if (!response.ok) {
-  const errorText = await response.text();
+      if (!response.ok) {
+        const errorText = await response.text();
 
-  console.error("Nominatim error:");
-  console.error("Status:", response.status);
-  console.error("Response:", errorText);
+        console.error("Geoapify error:");
+        console.error("Status:", response.status);
+        console.error("Response:", errorText);
 
-  req.flash("error", "Location service is temporarily unavailable.");
-  return res.redirect("/listings/new");
-}
+        req.flash("error", "Location service is temporarily unavailable.");
+        return res.redirect("/listings/new");
+      }
 
-const contentType = response.headers.get("content-type");
+      const data = await response.json();
 
-if (!contentType || !contentType.includes("application/json")) {
-  const responseText = await response.text();
+      if (!data.results || data.results.length === 0) {
+        req.flash("error", "Location could not be found");
+        return res.redirect("/listings/new");
+      }
 
-  console.error("Unexpected Nominatim response:");
-  console.error(responseText);
-
-  req.flash("error", "Unable to process this location.");
-  return res.redirect("/listings/new");
-}
-
-const data = await response.json();
-
-    if (data.length === 0) {
-      req.flash("error", "Location could not be found");
-      return res.redirect("/listings/new");
-    }
-
-    const latitude = parseFloat(data[0].lat);
-    const longitude = parseFloat(data[0].lon);
+      const latitude = data.results[0].lat;
+      const longitude = data.results[0].lon;
 
     const newListing = new Listing(req.body.listing);
 
