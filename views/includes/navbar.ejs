@@ -34,6 +34,7 @@
         <a class="nav-link" href="/listings">Explore</a>
       </div>
 
+      <% if (currentPath === "/listings") { %>
       <div class="navbar-nav ms-auto">
         <form class="d-flex" role="search">
           <input class="form-control me-2 search-input" type="search" placeholder="Search Destinations"/>
@@ -41,6 +42,7 @@
             <i class="fa-solid fa-magnifying-glass"></i>Search</button>
         </form>
       </div>
+      <% } %>
 
       <div class="navbar-nav ms-auto">
         <a class="nav-link" href="/listings/new">Add new Listing</a>
