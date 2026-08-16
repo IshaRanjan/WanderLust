@@ -96,11 +96,18 @@ app.use("/listings",listingRouter);
 app.use("/listings/:id/reviews",reviewRouter);
 app.use("/",userRouter);
 
+app.use((req, res, next) => {
+    res.locals.currentPath = req.path;
+    next();
+});
+
 app.get("/", (req, res) => {
   res.redirect("/listings");
 });
 
-
+app.get("/health", (req, res) => {
+    res.status(200).json({ status: "OK" });
+});
 
 //if any route does't match
 app.all("*", (req, res, next) => {
